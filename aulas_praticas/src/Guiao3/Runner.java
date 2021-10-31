@@ -4,13 +4,14 @@ import java.util.Random;
 import java.util.function.Supplier;
 
 class Runner implements Runnable {
-	private Bank b;
+
+	private IBank b;
 	private int num_of_accounts;
 	private int delta;
 	private static final int CASES = 5;
 	private static final int MAX_VALUE = 2501;
 
-	public Runner(Bank b, int n) { 
+	public Runner(IBank b, int n) { 
 		this.b = b;
 		this.num_of_accounts = n;
 		this.delta = 0;
