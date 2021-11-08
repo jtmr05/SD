@@ -32,7 +32,7 @@ class Agreement {
 
         if(this.counter < this.threshold)
             while(r == this.round)
-                cond.await();
+                this.cond.await();
         else{
             this.agreed_value = this.max_so_far;
             this.counter = 0;
