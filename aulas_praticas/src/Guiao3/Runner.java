@@ -11,7 +11,7 @@ class Runner implements Runnable {
 	private static final int CASES = 5;
 	private static final int MAX_VALUE = 2501;
 
-	public Runner(IBank b, int n) { 
+	Runner(IBank b, int n) { 
 		this.b = b;
 		this.num_of_accounts = n;
 		this.delta = 0;

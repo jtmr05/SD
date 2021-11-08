@@ -10,7 +10,7 @@ class RWBank implements IBank{
     private int nextId;
 	private ReadWriteLock lock;
 	
-	public RWBank(){
+	RWBank(){
 		this.map = new HashMap<Integer, Account>();
 		this.nextId = 0;
 		this.lock = new ReentrantReadWriteLock();

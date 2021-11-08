@@ -10,7 +10,7 @@ class Bank implements IBank{
     private int nextId;
 	private Lock lock;
 	
-	public Bank(){
+	Bank(){
 		this.map = new HashMap<Integer, Account>();
 		this.nextId = 0;
 		this.lock = new ReentrantLock();
