@@ -2,7 +2,7 @@ package Guiao4;
 
 class Common {
 
-    public static void common(IBarrier barrier, final int NUM_OF_THREADS) {
+    public static void common(IBarrier barrier, int NUM_OF_THREADS) {
         
         Thread[] threads = new Thread[NUM_OF_THREADS];
         
@@ -41,5 +41,32 @@ class Ex2{
 
         IBarrier barrier = new ReentrantBarrier(THRESHOLD);
         Common.common(barrier, NUM_OF_THREADS);
+    }
+}
+
+class Ex3{
+
+    private static final int NUM_OF_THREADS = 20;
+    private static final int THRESHOLD = 5;
+    
+    public static void main(String[] args) {
+        
+        Agreement agreement = new Agreement(THRESHOLD);
+
+        Thread[] threads = new Thread[NUM_OF_THREADS];
+        
+        for(int i = 0; i < NUM_OF_THREADS; i++)
+            threads[i] = new Thread(new AgreeRunner(agreement), (i+1)+"");
+
+        for(Thread t : threads)
+            t.start();
+        
+        for(Thread t : threads)
+            try{
+                t.join();
+            }
+            catch(InterruptedException e){
+                System.out.println("uh oh");
+            }
     }
 }

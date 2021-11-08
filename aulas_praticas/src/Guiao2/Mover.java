@@ -3,8 +3,9 @@ package Guiao2;
 import java.util.Random;
 
 public class Mover implements Runnable{
-    private IBank b;
-    private int s;
+    
+    private final IBank b;
+    private final int s;
 
     Mover(IBank b, int s){ 
         this.b=b; 

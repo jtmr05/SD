@@ -6,9 +6,9 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 class RWBank implements IBank{
 
-    private Map<Integer, Account> map;
+    private final Map<Integer, Account> map;
+	private final ReadWriteLock lock;
     private int nextId;
-	private ReadWriteLock lock;
 	
 	RWBank(){
 		this.map = new HashMap<Integer, Account>();

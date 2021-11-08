@@ -2,7 +2,7 @@ package Guiao4;
 
 class Runner implements Runnable {
     
-    private IBarrier barrier;
+    private final IBarrier barrier;
 
     Runner(IBarrier b){
         this.barrier = b;

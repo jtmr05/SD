@@ -2,7 +2,7 @@ package Guiao1;
 
 class Client implements Runnable {
     
-    private IBank bank;
+    private final IBank bank;
 
 	Client(IBank b){
 		this.bank = b;

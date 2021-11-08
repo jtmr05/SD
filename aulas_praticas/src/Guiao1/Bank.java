@@ -2,7 +2,7 @@ package Guiao1;
 
 class Bank implements IBank {
 
-	private Account savings;
+	private final Account savings;
 
 	Bank(){
 		this.savings = new Account(0);

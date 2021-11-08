@@ -7,8 +7,8 @@ import java.util.stream.Stream;
 
 class BankLockedAccount implements IBank{
     
-    private int slots;
-    private LockedAccount[] av; 
+    private final int slots;
+    private final LockedAccount[] av; 
     private final Lock lock; //useless
 
     BankLockedAccount(int slots){

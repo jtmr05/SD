@@ -5,8 +5,8 @@ import java.util.concurrent.locks.ReentrantLock;
 
 class LockedBank implements IBank {
 
-    private Account savings;
-    private Lock lock;
+    private final Account savings;
+    private final Lock lock;
 
 	LockedBank(){
 		this.savings = new Account(0);

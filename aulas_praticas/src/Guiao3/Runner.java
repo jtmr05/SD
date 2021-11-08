@@ -5,7 +5,7 @@ import java.util.function.Supplier;
 
 class Runner implements Runnable {
 
-	private IBank b;
+	private final IBank b;
 	private int num_of_accounts;
 	private int delta;
 	private static final int CASES = 5;

@@ -6,9 +6,9 @@ import java.util.concurrent.locks.ReentrantLock;
 
 class Bank implements IBank{
 
-    private Map<Integer, Account> map;
+    private final Map<Integer, Account> map;
+	private final Lock lock;
     private int nextId;
-	private Lock lock;
 	
 	Bank(){
 		this.map = new HashMap<Integer, Account>();

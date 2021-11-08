@@ -6,7 +6,7 @@ import java.util.concurrent.locks.ReentrantLock;
 class Account {
 
     private int balance;
-    private Lock lock;
+    private final Lock lock;
 
     Account(int balance) { 
         this.balance = balance; 
