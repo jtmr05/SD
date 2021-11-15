@@ -26,7 +26,7 @@ class Barrier implements IBarrier {
             while(this.counter < this.threshold)
                 this.cond.await();
         else
-            this.cond.signalAll(); //forall n >= threshold, nth thread will signalAll()
+            this.cond.signalAll(); //forall n >= threshold, nth thread would signalAll()
                                    //if-clause prevents this
         
         this.lock.unlock();
