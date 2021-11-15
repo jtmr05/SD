@@ -49,8 +49,8 @@ class Warehouse {
     public void consume(String[] items) throws InterruptedException {
         this.lock.lock();
 
-        for (String s : items){
-            Product p = this.get(s);
+        for (String i : items){
+            Product p = this.get(i);
 
             while(p.quantity <= 0)
                 p.is_empty.await();
@@ -64,19 +64,18 @@ class Warehouse {
     public void coop_consume(String[] items) throws InterruptedException {
         this.lock.lock();
 
-        List<Product> products = new ArrayList<>();
+        for (int i = 0; i < items.length; i++){
+            Product p = this.get(items[i]);
 
-        for (String s : items){
-            Product p = this.get(s);
-            products.add(p);
-
-            while(p.quantity <= 0)
+            while(p.quantity <= 0){
                 p.is_empty.await();
+                i = 0;
+            }
         }
 
-        for(Iterator<Product> iter = products.iterator(); iter.hasNext();)
-            iter.next().quantity--;
-        
+        for(String i : items)
+            this.get(i).quantity--;
+
         this.lock.unlock();
     }
 }
