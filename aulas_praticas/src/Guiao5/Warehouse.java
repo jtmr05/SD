@@ -21,12 +21,18 @@ class Warehouse {
 
         Product(){
             this.quantity = 0;
-            this.is_empty = lock.newCondition();
+            this.is_empty = Warehouse.this.lock.newCondition();
         }        
     }
 
     private Product get(String item) {
         Product p = this.map.get(item);
+
+        /**
+         * get method won't ever be called outside a lock/unlock wrap
+         * if it were possible, one or more threads would be pointlessly updating
+         * soon-to-be dereferenced Product objects
+         */
         
         if (p == null){
             p = new Product();
