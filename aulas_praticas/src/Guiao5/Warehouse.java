@@ -46,7 +46,7 @@ class Warehouse {
         this.lock.unlock();
     }
 
-    public void consume(String[] items) throws InterruptedException {
+    public void consume_greedy(String[] items) throws InterruptedException {
         this.lock.lock();
 
         for (String i : items){
@@ -61,7 +61,7 @@ class Warehouse {
         this.lock.unlock();
     }
 
-    public void coop_consume(String[] items) throws InterruptedException {
+    public void consume_cooperative(String[] items) throws InterruptedException {
         this.lock.lock();
 
         for (int i = 0; i < items.length; i++){
@@ -78,14 +78,39 @@ class Warehouse {
 
         this.lock.unlock();
     }
+
+    public void consume_mixed(String[] items) throws InterruptedException {
+        this.lock.lock();
+
+        int number_of_tries = 0;
+
+        for (int i = 0; i < items.length && number_of_tries < 3; i++){
+            Product p = this.get(items[i]);
+
+            while(p.quantity <= 0){
+                p.is_empty.await();
+                i = 0;
+                number_of_tries++;
+            }
+        }
+
+        if(number_of_tries==3){
+            this.consume_greedy(items);
+            this.lock.unlock();
+        }
+        else{
+            for(String i : items)
+                this.get(i).quantity--;
+
+            this.lock.unlock();
+        }
+    }
 }
 
 /**
- * A | B | C
- * 1 | 1 | 0
  * 
- * cliente 1 chega, quer os 3, espera...
- * cliente 2
- * 
+ * tornar o stock limitado
+ * acesso concorrente ao warehouse
+ * registar e remover produtos
  * 
  */
