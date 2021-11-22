@@ -29,16 +29,20 @@ class IntReaderGlobal implements Runnable {
                 try{
                     sum += Integer.parseInt(line);
                     count++;
-                    this.n.add(line);
+                    //this.n.add(line);
                 }
                 catch(NumberFormatException e){}
                 out.println(sum + "");
                 out.flush();
             }
-            if(count > 0){
-                out.println("average = " + sum/count + " and global average = " + this.n.get_average());
-                out.flush();
-            }
+            
+            this.n.add(sum, count);
+
+            if(count <= 0) 
+                count = 1;
+            out.println("average = " + (double) sum/count + " and global average = " + this.n.get_average());
+            out.flush();
+            
 
             this.socket.shutdownOutput();
             this.socket.shutdownInput();

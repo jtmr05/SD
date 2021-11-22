@@ -32,10 +32,11 @@ class IntReader implements Runnable {
                 out.println(sum + "");
                 out.flush();
             }
-            if(count > 0){
-                out.println("average = " + sum/count);
-                out.flush();
-            }
+            if(count <= 0)
+                count = 1;
+            out.println("average = " + (double) sum/count);
+            out.flush();
+            
 
             this.socket.shutdownOutput();
             this.socket.shutdownInput();

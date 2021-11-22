@@ -33,7 +33,7 @@ class Server {
                     
                 }
                 if(count > 0){
-                    out.println("average = " + sum/count);
+                    out.println("average = " + (double) sum/count);
                     out.flush();
                 }
 
