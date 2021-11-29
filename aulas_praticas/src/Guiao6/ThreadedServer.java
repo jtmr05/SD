@@ -7,12 +7,13 @@ import java.net.Socket;
 class ThreadedServer {
 
     public static final boolean GLOBAL_ON = true;
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException{
+        ServerSocket ss = new ServerSocket(12345);
+        
         try {
-            ServerSocket ss = new ServerSocket(12345);
             Numbers n = new Numbers();
 
-            while (true) {
+            while(true){
                 Socket socket = ss.accept();
 
                 if(GLOBAL_ON)
@@ -21,8 +22,8 @@ class ThreadedServer {
                     new Thread(new IntReader(socket)).start();
             }
         }
-        catch (IOException e) {
-            e.printStackTrace();
+        finally{
+            ss.close();
         }
     }
 }

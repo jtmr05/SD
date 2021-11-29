@@ -8,10 +8,10 @@ import java.net.ServerSocket;
 import java.net.Socket;
 
 class Server {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
+        ServerSocket ss = new ServerSocket(12345);
+        
         try {
-            ServerSocket ss = new ServerSocket(12345);
-
             while (true) {
                 Socket socket = ss.accept();
 
@@ -42,8 +42,9 @@ class Server {
                 socket.close();
             }
 
-        } catch (IOException e) {
-            e.printStackTrace();
+        } 
+        finally{
+            ss.close();
         }
     }
 }
