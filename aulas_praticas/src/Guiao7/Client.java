@@ -27,12 +27,14 @@ class Client {
         DataInputStream in_server = new DataInputStream(socket.getInputStream());
 
         ContactList cl = ContactList.deserialize(in_server);
-        System.out.println(cl.toString());
+        for(Contact c : cl)
+            System.out.println(c.toString());
         socket.shutdownInput();
         in_server = null;
+        cl = null;
 
         
-        
+
         String userInput;
         BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
         DataOutputStream out = new DataOutputStream(socket.getOutputStream());

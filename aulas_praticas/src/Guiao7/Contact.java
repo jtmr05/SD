@@ -2,7 +2,6 @@ package Guiao7;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
-import java.io.EOFException;
 import java.io.IOException;
 import java.util.*;
 
@@ -11,7 +10,7 @@ class Contact{
     private final int age;
     private final long phoneNumber;
     private final String company;     // Pode ser null
-    private final ArrayList<String> emails;
+    private final List<String> emails;
 
     Contact (String name, int age, long phoneNumber, String company, List<String> emails){
         this.name = name;
@@ -61,7 +60,7 @@ class Contact{
     }
 
     // @TODO
-    public static Contact deserialize (DataInputStream in) throws IOException{ 
+    public static Contact deserialize (DataInputStream in){ 
         try{
             String name = in.readUTF();
             int age = in.readInt();
@@ -76,19 +75,18 @@ class Contact{
 
             return new Contact(name, age, phoneNumber, company, emails);
         }
-        catch(EOFException e){
+        catch(IOException e){
             return null;
         }
     }
 
     public String toString () {
         StringBuilder builder = new StringBuilder();
-        builder.append(this.name).append(";");
-        builder.append(this.age).append(";");
-        builder.append(this.phoneNumber).append(";");
-        builder.append(this.company).append(";");
-        builder.append(this.emails.toString());
-        builder.append("}");
+        builder.append(this.name).append(";")
+               .append(this.age).append(";")
+               .append(this.phoneNumber).append(";")
+               .append(this.company).append(";")
+               .append(this.emails.toString());
         return builder.toString();
     }
 }

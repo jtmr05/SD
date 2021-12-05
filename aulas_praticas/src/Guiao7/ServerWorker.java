@@ -24,6 +24,7 @@ class ServerWorker implements Runnable {
             cl.serialize(out);
             out.flush();
             this.socket.shutdownOutput();
+            out = null;
 
             //read contacts to update/add
             DataInputStream in = new DataInputStream(this.socket.getInputStream());

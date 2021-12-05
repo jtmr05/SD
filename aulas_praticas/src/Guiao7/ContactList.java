@@ -25,7 +25,7 @@ class ContactList extends ArrayList<Contact> {
     // @TODO
     public void serialize (DataOutputStream out) throws IOException{
         out.writeInt(this.size());
-        Iterator<Contact> iter = super.iterator();
+        Iterator<Contact> iter = this.iterator();
         while(iter.hasNext())
             iter.next().serialize(out);
     }
@@ -34,15 +34,11 @@ class ContactList extends ArrayList<Contact> {
     public static ContactList deserialize (DataInputStream in) throws IOException{
         ContactList cl = new ContactList(in.readInt());
 
-        while(true){
-            Contact c = Contact.deserialize(in);
-
-            if(c != null)
-                cl.add(c);
-            else
-                break;
+        for(Contact c = Contact.deserialize(in); c != null;){
+            cl.add(c);
+            c = Contact.deserialize(in);
         }
-
+        
         return cl;
     }
 }
