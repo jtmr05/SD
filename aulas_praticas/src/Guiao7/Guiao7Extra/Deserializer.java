@@ -9,7 +9,7 @@ import java.util.Map;
 
 class Deserializer{
 
-    private Map<Integer, Friend> keys;
+    private final Map<Integer, Friend> keys;
     private int current;
 
     Deserializer(){

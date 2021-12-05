@@ -9,7 +9,7 @@ import java.util.Map;
 class Serializer {
  
     //map the phone number (unique id) to the position in which it appeared
-    private Map<Long, Integer> keys;
+    private final Map<Long, Integer> keys;
     private int current;
 
     Serializer(){
