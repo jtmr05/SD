@@ -2,52 +2,64 @@ package Guiao7.Guiao7Extra;
 
 import java.io.DataOutputStream;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.AbstractMap.SimpleEntry;
+import java.util.Map.Entry;
+import java.util.function.Consumer;
 
 class Serializer {
  
-    //map the phone number (unique id) to the position in which it appeared
-    private final Map<Long, Integer> keys;
-    private int current;
+    private final Set<Long> people;
+    private final Set<Entry<Long, Long>> relationships;
 
     Serializer(){
-        this.keys = new HashMap<>();
-        this.current = 0;
+        this.people = new HashSet<>();
+        this.relationships = new HashSet<>();
+    }
+
+    public void serialize(DataOutputStream out, Friend f) throws IOException {
+        this.serializePersonalInfo(out, f);
+        this.serializeRelationships(out);
     }
     
-    public void serialize(DataOutputStream out, Friend f) throws IOException {
+    public void serializePersonalInfo(DataOutputStream out, Friend f) throws IOException {
         Long key = Long.valueOf(f.getPhoneNumber());
 
-        if(this.keys.containsKey(key)){
-            out.writeBoolean(false); //will we be writing the object completely?
-            out.writeInt(this.keys.get(key));
-        }
-        else{
-            this.keys.put(key, Integer.valueOf(this.current++));
+        if(!this.people.contains(key)){
+            
+            this.people.add(key);
+            out.writeBoolean(true); //has next...
+            out.writeUTF(f.getName());
+            out.writeInt(f.getAge());
+            out.writeLong(f.getPhoneNumber());
+            out.writeUTF(f.getEmail());
 
-            out.writeBoolean(true);
+            Consumer<Friend> consumer = x -> {
+                Long number = Long.valueOf(x.getPhoneNumber());
+                SimpleEntry<Long, Long> entry = new SimpleEntry<>(key, number);
+                this.relationships.add(entry);
+                try {
+                    this.serializePersonalInfo(out, f);
+                } 
+                catch (IOException e) {
+                    e.printStackTrace();
+                }
+            };
 
-            this.serializePersonalInfo(out, f);
-    
-            out.writeInt(f.getFriends().size());
-            Iterator<Friend> f_iter = f.getFriends().iterator();
-            while(f_iter.hasNext())
-                this.serialize(out, f_iter.next());
+            f.getFriends().stream().forEach(consumer);
+            
+            out.writeBoolean(false);
         }
     }
 
-    private void serializePersonalInfo(DataOutputStream out, Friend f) throws IOException {
-        out.writeUTF(f.getName());
-        out.writeInt(f.getAge());
-        out.writeLong(f.getPhoneNumber());
-        out.writeUTF(f.getEmail());
+    private void serializeRelationships(DataOutputStream out) throws IOException {
+        int size = this.relationships.size();
+        out.writeInt(size);
+        for(Entry<Long, Long> entry : this.relationships){
+            out.writeLong(entry.getKey());
+            out.writeLong(entry.getValue());
+        }
     }
 
-    /**
-     * the better approach is to treat a friend as a graph
-     * serialize personal info for each friend in the graph
-     * serialize the relationship between them afterwards
-     */
 }

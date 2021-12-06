@@ -2,54 +2,53 @@ package Guiao7.Guiao7Extra;
 
 import java.io.DataInputStream;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 class Deserializer{
 
-    private final Map<Integer, Friend> keys;
-    private int current;
+    private final Map<Long, Friend> people;
+    private Friend ret;
 
     Deserializer(){
-        this.keys = new HashMap<>();
-        this.current = 0;
+        this.people = new HashMap<>();
+        this.ret = null;
     }
 
     public Friend deserialize(DataInputStream in) {
         
         try{
-            Friend f; Integer key;
+            this.deserializePersonalInfo(in);
 
-            if(!in.readBoolean()){
-                key = Integer.valueOf(in.readInt());
-                f = this.keys.get(key);
+            for(int i = 0; i < this.people.values().size(); i++)
+                in.readBoolean();
+
+            int size = in.readInt();
+            for(int i = 0; i < size; i++){
+                Long key = in.readLong();
+                Long value = in.readLong();
+                this.people.get(key).setFriendship(this.people.get(value));
             }
-            else{
-                key = Integer.valueOf(this.current++);
 
-                String name = in.readUTF();
-                int age = in.readInt();
-                long phoneNumber = in.readLong();
-                String email = in.readUTF();
-
-                int f_size = in.readInt();
-                List<Friend> friends = new ArrayList<>(f_size);
-                for(int i = 0; i < f_size; i++){
-                    Friend aux = this.deserialize(in);
-                    if(aux != null)
-                        friends.add(aux);
-                    else
-                        break;
-                }
-                f = new Friend(name, age, phoneNumber, email, friends);
-                this.keys.put(key, f); //this is wrong
-            }
-            return f;
+            return this.ret;
         }
         catch(IOException e){
             return null;
         }    
+    }
+
+    public void deserializePersonalInfo(DataInputStream in) throws IOException {
+        while(in.readBoolean()){
+            String name = in.readUTF();
+            int age = in.readInt();
+            long phoneNumber = in.readLong();
+            String email = in.readUTF();
+
+            Friend f = new Friend(name, age, phoneNumber, email);
+            this.people.put(Long.valueOf(phoneNumber), f);
+            
+            if(this.ret == null)
+                this.ret = f; 
+        }
     }
 }
