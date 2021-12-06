@@ -85,7 +85,7 @@ class ImprovedWarehouse {
         if(p != null){
             p.lock();
 
-            int diff, initialq = quantity;
+            int diff;
             
             while(quantity > 0){
                 
@@ -93,17 +93,14 @@ class ImprovedWarehouse {
                 quantity -= diff;
 
                 /** before sleeping, make sure others will consume 
-                 *  don't sleep if everything is already supplied
+                 *  sleep if it's full and there's still quantity to supply
                 */
-                while(p.quantity == STOCK_SIZE && quantity > 0){ 
-                    p.is_empty.signalAll();
+                p.is_empty.signalAll();
+                
+                while(p.quantity == STOCK_SIZE && quantity > 0)
                     p.is_full.await();
-                }
             }
                 
-            if(initialq > 0)
-                p.is_empty.signalAll();
-
             p.unlock();
         }
     }

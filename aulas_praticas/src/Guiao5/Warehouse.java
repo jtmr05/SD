@@ -112,11 +112,3 @@ class Warehouse {
         }
     }
 }
-
-/**
- * 
- * tornar o stock limitado
- * acesso concorrente ao warehouse
- * registar e remover produtos
- * 
- */

@@ -32,11 +32,7 @@ class Deserializer{
                 String name = in.readUTF();
                 int age = in.readInt();
                 long phoneNumber = in.readLong();
-                
-                int e_size = in.readInt();
-                List<String> emails = new ArrayList<>(e_size);
-                for(int i = 0; i < e_size; i++)
-                    emails.add(in.readUTF());
+                String email = in.readUTF();
 
                 int f_size = in.readInt();
                 List<Friend> friends = new ArrayList<>(f_size);
@@ -47,7 +43,8 @@ class Deserializer{
                     else
                         break;
                 }
-                f = new Friend(name, age, phoneNumber, emails, friends);
+                f = new Friend(name, age, phoneNumber, email, friends);
+                this.keys.put(key, f); //this is wrong
             }
             return f;
         }

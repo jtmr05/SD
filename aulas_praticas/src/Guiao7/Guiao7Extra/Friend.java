@@ -9,14 +9,14 @@ class Friend {
     private final String name;
     private final int age;
     private final long phoneNumber;
-    private final List<String> emails;
+    private final String email;
     private final List<Friend> friends;
 
-    Friend(String name, int age, long phoneNumber, List<String> emails, List<Friend> friends){
+    Friend(String name, int age, long phoneNumber, String email, List<Friend> friends){
         this.name = name;
         this.age = age;
         this.phoneNumber = phoneNumber;
-        this.emails = new ArrayList<>(emails);
+        this.email = email;
         this.friends = new ArrayList<>(friends);
     }
 
@@ -32,8 +32,8 @@ class Friend {
         return this.phoneNumber;
     }
     
-    public List<String> getEmails(){ 
-        return new ArrayList<>(this.emails); 
+    public String getEmail(){ 
+        return this.email; 
     }
 
     public List<Friend> getFriends(){
@@ -55,7 +55,7 @@ class Friend {
         builder.append(this.name).append(";")
                .append(this.age).append(";")
                .append(this.phoneNumber).append(";")
-               .append(this.emails.toString())
+               .append(this.email).append(";")
                .append(this.friends.toString());
         return builder.toString();
     }

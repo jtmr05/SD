@@ -28,19 +28,26 @@ class Serializer {
             this.keys.put(key, Integer.valueOf(this.current++));
 
             out.writeBoolean(true);
-            out.writeUTF(f.getName());
-            out.writeInt(f.getAge());
-            out.writeLong(f.getPhoneNumber());
+
+            this.serializePersonalInfo(out, f);
     
-            out.writeInt(f.getEmails().size());
-            Iterator<String> e_iter = f.getEmails().iterator();
-            while(e_iter.hasNext())
-                out.writeUTF(e_iter.next());
-            
             out.writeInt(f.getFriends().size());
             Iterator<Friend> f_iter = f.getFriends().iterator();
             while(f_iter.hasNext())
                 this.serialize(out, f_iter.next());
         }
     }
+
+    private void serializePersonalInfo(DataOutputStream out, Friend f) throws IOException {
+        out.writeUTF(f.getName());
+        out.writeInt(f.getAge());
+        out.writeLong(f.getPhoneNumber());
+        out.writeUTF(f.getEmail());
+    }
+
+    /**
+     * the better approach is to treat a friend as a graph
+     * serialize personal info for each friend in the graph
+     * serialize the relationship between them afterwards
+     */
 }
