@@ -1,4 +1,4 @@
-package Guiao4;
+package guiao4;
 
 interface IBarrier {
 

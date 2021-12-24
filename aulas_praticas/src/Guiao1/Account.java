@@ -1,14 +1,14 @@
-package Guiao1;
+package guiao1;
 
 class Account {
 
     private int balance;
 
-    Account(int balance) { 
-        this.balance = balance; 
+    Account(int balance) {
+        this.balance = balance;
     }
 
-    public int balance() { 
+    public int balance() {
         return this.balance;
     }
 

@@ -1,7 +1,7 @@
-package Guiao4;
+package guiao4;
 
 class Runner implements Runnable {
-    
+
     private final IBarrier barrier;
 
     Runner(IBarrier b){

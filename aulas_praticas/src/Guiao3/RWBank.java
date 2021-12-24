@@ -1,4 +1,4 @@
-package Guiao3;
+package guiao3;
 
 import java.util.*;
 import java.util.concurrent.locks.ReadWriteLock;
@@ -9,7 +9,7 @@ class RWBank implements IBank{
     private final Map<Integer, Account> map;
 	private final ReadWriteLock lock;
     private int nextId;
-	
+
 	RWBank(){
 		this.map = new HashMap<Integer, Account>();
 		this.nextId = 0;
@@ -115,7 +115,7 @@ class RWBank implements IBank{
     // fails if either account does not exist or insufficient balance
     public boolean transfer(int from, int to, int value) {
 		this.readLock();
-        
+
 		Account c_from = this.map.get(from), c_to = this.map.get(to);
 		boolean ret = false;
 
@@ -135,13 +135,13 @@ class RWBank implements IBank{
 		}
 		else
 			this.readUnlock();
-		
+
 		return ret;
     }
 
     // sum of balances in set of accounts; 0 if some does not exist
     public int totalBalance(int[] ids) {
-		
+
 		List<Account> lc = new ArrayList<>(ids.length);
 
 		this.readLock();

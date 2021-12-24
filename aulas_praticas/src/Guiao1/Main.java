@@ -1,4 +1,4 @@
-package Guiao1;
+package guiao1;
 
 class Ex1 {
     public static void main(String[] args) {
@@ -14,17 +14,17 @@ class Ex1 {
 		for(int i = 0; i < N; i++)
 			try {
 				threads[i].join();
-			} 
+			}
 			catch (InterruptedException e) {
 				System.out.println("uh oh");
 			}
-		
+
 		System.out.println("fim");
 	}
 }
 
 class Common{
-	
+
 	public static void common(IBank bank){
 		final int N = 10;
 		Thread[] threads = new Thread[N];
@@ -38,12 +38,12 @@ class Common{
 		for(int i = 0; i < N; i++)
 			try {
 				threads[i].join();
-			} 
+			}
 			catch (InterruptedException e) {
 				System.out.println("uh oh");
 			}
-		
-        int b = bank.balance(); 
+
+        int b = bank.balance();
         System.out.println(b);
         System.out.println(b == 1000000);
 	}

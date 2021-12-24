@@ -1,4 +1,4 @@
-package Guiao6;
+package guiao6;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -10,7 +10,7 @@ import java.net.Socket;
 class Server {
     public static void main(String[] args) throws IOException {
         ServerSocket ss = new ServerSocket(12345);
-        
+
         try {
             while (true) {
                 Socket socket = ss.accept();
@@ -30,7 +30,7 @@ class Server {
                     catch(NumberFormatException e){}
                         out.println(sum + "");
                         out.flush();
-                    
+
                 }
                 if(count > 0){
                     out.println("average = " + (double) sum/count);
@@ -42,7 +42,7 @@ class Server {
                 socket.close();
             }
 
-        } 
+        }
         finally{
             ss.close();
         }

@@ -1,7 +1,7 @@
-package Guiao2;
+package guiao2;
 
 interface IBank {
-    
+
     public int balance(int id);
 
     public boolean deposit(int id, int value);

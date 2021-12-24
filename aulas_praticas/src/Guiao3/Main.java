@@ -1,4 +1,4 @@
-package Guiao3;
+package guiao3;
 
 import java.util.Arrays;
 import java.util.Random;
@@ -22,10 +22,10 @@ class Common{
 			expected += value;
             bank.createAccount(value);
         }
-		
+
 		Thread[] threads = new Thread[NUM_OF_THREADS];
 		Runnable[] runners = new Runner[NUM_OF_THREADS]; //we'll need to keep track of these...
-               
+
 		for(int i = 0; i < NUM_OF_THREADS; i++){
             runners[i] = new Runner(bank, NUM_OF_ACCOUNTS);
 			threads[i] = new Thread(runners[i]);
@@ -35,7 +35,7 @@ class Common{
 
 		for(Thread t : threads)
 			t.start();
-		
+
 		for(Thread t : threads)
 			try{
 				t.join();
@@ -43,9 +43,9 @@ class Common{
 			catch(InterruptedException e){
                 System.out.println("uh oh");
             }
-        
+
         long end = System.currentTimeMillis();
-        
+
         expected += Arrays.stream(runners).map(Runner.class::cast).
                                            mapToInt(Runner::get_delta).
                                            sum();

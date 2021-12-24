@@ -1,13 +1,13 @@
-package Guiao2;
+package guiao2;
 
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 import java.util.stream.Stream;
 
 class Bank implements IBank{
-    
+
     private final int slots;
-    private final Account[] av; 
+    private final Account[] av;
     private final Lock lock;
 
     Bank(int slots){
@@ -35,13 +35,13 @@ class Bank implements IBank{
         this.lock.lock();
         boolean ret = this.av[id].deposit(value);
         this.lock.unlock();
-        return ret;    
+        return ret;
     }
 
     public boolean withdraw(int id, int value) {
         if (id < 0 || id >= this.slots)
             return false;
-        
+
         this.lock.lock();
         boolean ret = this.av[id].withdraw(value);
         this.lock.unlock();
@@ -52,7 +52,7 @@ class Bank implements IBank{
 
         if(from < 0 || from >= this.slots || to < 0 || to >= this.slots)
 			return false;
-        
+
         this.lock.lock();
         boolean ret;
         if((ret = this.av[from].withdraw(value)))
@@ -66,5 +66,5 @@ class Bank implements IBank{
 		int ret = Stream.of(this.av).map(Account::balance).reduce(0, (x1, x2) -> x1 + x2);
 		this.lock.unlock();
 		return ret;
-	}   
+	}
 }

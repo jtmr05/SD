@@ -1,4 +1,4 @@
-package Guiao8;
+package guiao8;
 
 import java.net.Socket;
 

@@ -1,4 +1,4 @@
-package Guiao4;
+package guiao4;
 
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
@@ -35,5 +35,5 @@ class ReentrantBarrier implements IBarrier {
         }
 
         this.lock.unlock();
-    }   
+    }
 }

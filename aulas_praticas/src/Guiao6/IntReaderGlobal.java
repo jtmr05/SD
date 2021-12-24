@@ -1,4 +1,4 @@
-package Guiao6;
+package guiao6;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -35,19 +35,19 @@ class IntReaderGlobal implements Runnable {
                 out.println(sum + "");
                 out.flush();
             }
-            
+
             this.n.add(sum, count);
 
-            if(count <= 0) 
+            if(count <= 0)
                 count = 1;
             out.println("average = " + (double) sum/count + " and global average = " + this.n.get_average());
             out.flush();
-            
+
 
             this.socket.shutdownOutput();
             this.socket.shutdownInput();
             this.socket.close();
-        } 
+        }
         catch (IOException e) {
             e.printStackTrace();
         }

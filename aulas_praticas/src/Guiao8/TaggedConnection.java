@@ -1,4 +1,4 @@
-package Guiao8;
+package guiao8;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -9,14 +9,14 @@ import java.net.Socket;
 import java.util.concurrent.locks.*;
 
 class TaggedConnection implements AutoCloseable {
-    
+
     static class Frame {
-        
+
         public final int tag;
         public final byte[] data;
-        
-        Frame(int tag, byte[] data){ 
-            this.tag = tag; 
+
+        Frame(int tag, byte[] data){
+            this.tag = tag;
             this.data = data;
         }
     }
@@ -35,7 +35,7 @@ class TaggedConnection implements AutoCloseable {
         this.readLock = new ReentrantLock();
     }
 
-    public void send(Frame frame) throws IOException { 
+    public void send(Frame frame) throws IOException {
         this.writeLock.lock();
 
         this.out.writeInt(frame.tag);
@@ -45,11 +45,11 @@ class TaggedConnection implements AutoCloseable {
 
         this.writeLock.unlock();
     }
-    
+
     public void send(int tag, byte[] data) throws IOException {
         this.send(new Frame(tag, data));
     }
-    
+
     public Frame receive() throws IOException {
         this.readLock.lock();
 
@@ -62,7 +62,7 @@ class TaggedConnection implements AutoCloseable {
         this.readLock.unlock();
         return f;
     }
-    
+
     public void close() throws IOException {
         this.in.close();
         this.out.close();

@@ -1,4 +1,4 @@
-package Guiao5;
+package guiao5;
 
 import java.util.*;
 import java.util.concurrent.locks.Condition;
@@ -39,11 +39,11 @@ class ImprovedWarehouse {
             this.is_empty = this.l.newCondition();
             this.is_full = this.l.newCondition();
         }
-        
+
         private void lock(){
             this.l.lock();
         }
-        
+
         private void unlock(){
             this.l.unlock();
         }
@@ -80,27 +80,27 @@ class ImprovedWarehouse {
     }
 
     public void supply(String item, int quantity) throws InterruptedException {
-        Product p = this.get(item); 
-        
+        Product p = this.get(item);
+
         if(p != null){
             p.lock();
 
             int diff;
-            
+
             while(quantity > 0){
-                
+
                 p.quantity += (diff = Math.min(STOCK_SIZE - p.quantity, quantity));
                 quantity -= diff;
 
-                /** before sleeping, make sure others will consume 
+                /** before sleeping, make sure others will consume
                  *  sleep if it's full and there's still quantity to supply
                 */
                 p.is_empty.signalAll();
-                
+
                 while(p.quantity == STOCK_SIZE && quantity > 0)
                     p.is_full.await();
             }
-                
+
             p.unlock();
         }
     }
@@ -113,12 +113,12 @@ class ImprovedWarehouse {
                 p.lock();
 
                 /**
-                 * it wouldn't be helpful to signalAll at this point 
+                 * it wouldn't be helpful to signalAll at this point
                  * since quantity hasn't been updated yet
                  */
                 while(p.quantity <= 0)
                     p.is_empty.await();
-                
+
                 p.quantity--;
                 p.is_full.signalAll();
 

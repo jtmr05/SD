@@ -1,4 +1,4 @@
-package Guiao6;
+package guiao6;
 
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;

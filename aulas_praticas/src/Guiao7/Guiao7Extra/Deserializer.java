@@ -1,4 +1,4 @@
-package Guiao7.Guiao7Extra;
+package guiao7.guiao7extra;
 
 import java.io.DataInputStream;
 import java.io.IOException;
@@ -16,7 +16,7 @@ class Deserializer{
     }
 
     public Friend deserialize(DataInputStream in) {
-        
+
         try{
             this.deserializePersonalInfo(in);
 
@@ -34,7 +34,7 @@ class Deserializer{
         }
         catch(IOException e){
             return null;
-        }    
+        }
     }
 
     public void deserializePersonalInfo(DataInputStream in) throws IOException {
@@ -46,9 +46,9 @@ class Deserializer{
 
             Friend f = new Friend(name, age, phoneNumber, email);
             this.people.put(Long.valueOf(phoneNumber), f);
-            
+
             if(this.ret == null)
-                this.ret = f; 
+                this.ret = f;
         }
     }
 }

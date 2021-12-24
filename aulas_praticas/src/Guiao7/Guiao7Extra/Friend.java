@@ -1,4 +1,4 @@
-package Guiao7.Guiao7Extra;
+package guiao7.guiao7extra;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -28,20 +28,20 @@ class Friend {
         this.friends = new HashSet<>();
     }
 
-    public String getName(){ 
-        return this.name; 
+    public String getName(){
+        return this.name;
     }
 
-    public int getAge(){ 
-        return this.age; 
+    public int getAge(){
+        return this.age;
     }
-    
-    public long getPhoneNumber(){ 
+
+    public long getPhoneNumber(){
         return this.phoneNumber;
     }
-    
-    public String getEmail(){ 
-        return this.email; 
+
+    public String getEmail(){
+        return this.email;
     }
 
     public List<Friend> getFriends(){
@@ -57,7 +57,7 @@ class Friend {
        s.serialize(out, this);
     }
 
-    public static Friend deserialize(DataInputStream in){ 
+    public static Friend deserialize(DataInputStream in){
         Deserializer ds = new Deserializer();
         return ds.deserialize(in);
     }

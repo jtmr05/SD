@@ -1,4 +1,4 @@
-package Guiao7;
+package guiao7;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -30,7 +30,7 @@ class ServerWorker implements Runnable {
             DataInputStream in = new DataInputStream(this.socket.getInputStream());
             while(true){
                 Contact c = Contact.deserialize(in);
-                
+
                 if(c != null)
                     this.manager.update(c);
                 else{

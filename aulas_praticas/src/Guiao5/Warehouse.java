@@ -1,4 +1,4 @@
-package Guiao5;
+package guiao5;
 
 import java.util.*;
 import java.util.concurrent.locks.Condition;
@@ -22,7 +22,7 @@ class Warehouse {
         Product(){
             this.quantity = 0;
             this.is_empty = Warehouse.this.lock.newCondition();
-        }        
+        }
     }
 
     private Product get(String item) {
@@ -33,7 +33,7 @@ class Warehouse {
          * if it were possible, one or more threads would be pointlessly updating
          * soon-to-be dereferenced Product objects
          */
-        
+
         if (p == null){
             p = new Product();
             this.map.put(item, p);
@@ -48,7 +48,7 @@ class Warehouse {
         Product p = this.get(item); //never null
         p.quantity += quantity;
         p.is_empty.signalAll();
-        
+
         this.lock.unlock();
     }
 
@@ -63,7 +63,7 @@ class Warehouse {
 
             p.quantity--;
         }
-        
+
         this.lock.unlock();
     }
 

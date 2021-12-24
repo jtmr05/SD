@@ -1,9 +1,9 @@
-package Guiao8;
+package guiao8;
+
+import static guiao8.TaggedConnection.Frame;
 
 import java.net.ServerSocket;
 import java.net.Socket;
-
-import static Guiao8.TaggedConnection.Frame;
 
 class ServerWithWorkers {
     final static int WORKERS_PER_CONNECTION = 3;

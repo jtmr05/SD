@@ -1,10 +1,10 @@
-package Guiao4;
+package guiao4;
 
 import java.util.Random;
 import java.util.function.Supplier;
 
 class AgreeRunner implements Runnable {
-    
+
     private final Agreement agreement;
 
     AgreeRunner(Agreement a){

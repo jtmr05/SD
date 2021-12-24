@@ -1,4 +1,4 @@
-package Guiao4;
+package guiao4;
 
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
@@ -13,7 +13,7 @@ class Agreement {
     private int agreed_value;
     private int counter;
     private int round;
-    
+
     Agreement (int N) {
         this.threshold = N;
         this.lock = new ReentrantLock();
@@ -22,10 +22,10 @@ class Agreement {
         this.max_so_far = Integer.MIN_VALUE;
         this.agreed_value = 0;
     }
-    
+
     public int propose(int choice) throws InterruptedException {
         this.lock.lock();
-        
+
         this.max_so_far = Math.max(this.max_so_far, choice);
         this.counter++;
         int r = this.round;
@@ -43,5 +43,5 @@ class Agreement {
 
         this.lock.unlock();
         return this.agreed_value;
-    } 
+    }
 }

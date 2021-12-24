@@ -1,4 +1,4 @@
-package Guiao8;
+package guiao8;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -16,7 +16,7 @@ public class FramedConnection implements AutoCloseable {
     private final DataOutputStream out;
     private final Lock writeLock;
     private final Lock readLock;
-    
+
     FramedConnection(Socket socket) throws IOException {
         this.s = socket;
         this.in = new DataInputStream(new BufferedInputStream(socket.getInputStream()));
@@ -37,11 +37,11 @@ public class FramedConnection implements AutoCloseable {
 
     public byte[] receive() throws IOException {
         this.readLock.lock();
-        
+
         int size = this.in.readInt();
         byte[] data = new byte[size];
         this.in.readFully(data);
-        
+
         this.readLock.unlock();
         return data;
     }

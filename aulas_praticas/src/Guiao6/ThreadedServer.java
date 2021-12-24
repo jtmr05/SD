@@ -1,4 +1,4 @@
-package Guiao6;
+package guiao6;
 
 import java.io.IOException;
 import java.net.ServerSocket;
@@ -9,7 +9,7 @@ class ThreadedServer {
     public static final boolean GLOBAL_ON = true;
     public static void main(String[] args) throws IOException{
         ServerSocket ss = new ServerSocket(12345);
-        
+
         try {
             Numbers n = new Numbers();
 

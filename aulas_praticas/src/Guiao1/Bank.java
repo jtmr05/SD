@@ -1,4 +1,4 @@
-package Guiao1;
+package guiao1;
 
 class Bank implements IBank {
 

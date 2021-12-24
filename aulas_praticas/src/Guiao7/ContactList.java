@@ -1,4 +1,4 @@
-package Guiao7;
+package guiao7;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -38,7 +38,7 @@ class ContactList extends ArrayList<Contact> {
             cl.add(c);
             c = Contact.deserialize(in);
         }
-        
+
         return cl;
     }
 }

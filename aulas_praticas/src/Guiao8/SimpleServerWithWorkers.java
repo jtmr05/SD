@@ -1,16 +1,16 @@
-package Guiao8;
+package guiao8;
 
 import java.net.ServerSocket;
 import java.net.Socket;
 
 
 class SimpleServerWithWorkers {
-    
+
     final static int WORKERS_PER_CONNECTION = 3;
 
     public static void main(String[] args) throws Exception {
         ServerSocket ss = new ServerSocket(12345);
-        
+
         try{
             while(true) {
                 Socket s = ss.accept();

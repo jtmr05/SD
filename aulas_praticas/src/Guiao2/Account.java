@@ -1,14 +1,14 @@
-package Guiao2;
+package guiao2;
 
 class Account {
 
     private int balance;
 
-    Account(int balance) { 
-        this.balance = balance; 
+    Account(int balance) {
+        this.balance = balance;
     }
 
-    public int balance() { 
+    public int balance() {
         return this.balance;
     }
 
@@ -21,7 +21,7 @@ class Account {
 
         if(value > this.balance)
             return false;
-        
+
         this.balance -= value;
         return true;
     }

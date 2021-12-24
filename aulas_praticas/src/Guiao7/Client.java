@@ -1,4 +1,4 @@
-package Guiao7;
+package guiao7;
 
 import java.io.BufferedReader;
 import java.io.DataInputStream;
@@ -14,7 +14,7 @@ class Client {
     public static Contact parseLine(String userInput){
         String[] tokens = userInput.split(" ");
 
-        if (tokens[3].equals("null")) 
+        if (tokens[3].equals("null"))
             tokens[3] = null;
 
         return new Contact(tokens[0], Integer.parseInt(tokens[1]), Long.parseLong(tokens[2]),
@@ -33,7 +33,7 @@ class Client {
         in_server = null;
         cl = null;
 
-        
+
 
         String userInput;
         BufferedReader in = new BufferedReader(new InputStreamReader(System.in));

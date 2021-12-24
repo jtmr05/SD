@@ -1,8 +1,8 @@
-package Guiao8;
+package guiao8;
+
+import static guiao8.TaggedConnection.Frame;
 
 import java.net.Socket;
-
-import static Guiao8.TaggedConnection.Frame;
 
 class WrongThreadedClient {
     public static void main(String[] args) throws Exception {

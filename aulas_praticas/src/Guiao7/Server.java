@@ -1,4 +1,4 @@
-package Guiao7;
+package guiao7;
 
 import java.io.IOException;
 import java.net.ServerSocket;
@@ -7,7 +7,7 @@ import java.net.Socket;
 class Server {
 
     public static void main (String[] args) throws IOException {
-        
+
         ServerSocket serverSocket = new ServerSocket(12345);
         try{
             ContactManager manager = new ContactManager();

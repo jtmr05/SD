@@ -1,4 +1,4 @@
-package Guiao3;
+package guiao3;
 
 import java.util.*;
 import java.util.concurrent.locks.Lock;
@@ -9,7 +9,7 @@ class Bank implements IBank{
     private final Map<Integer, Account> map;
 	private final Lock lock;
     private int nextId;
-	
+
 	Bank(){
 		this.map = new HashMap<Integer, Account>();
 		this.nextId = 0;
@@ -99,7 +99,7 @@ class Bank implements IBank{
     // fails if either account does not exist or insufficient balance
     public boolean transfer(int from, int to, int value) {
 		this.lock.lock();
-        
+
 		Account c_from = this.map.get(from), c_to = this.map.get(to);
 		boolean ret = false;
 
@@ -119,13 +119,13 @@ class Bank implements IBank{
 		}
 		else
 			this.lock.unlock();
-		
+
 		return ret;
     }
 
     // sum of balances in set of accounts; 0 if some does not exist
     public int totalBalance(int[] ids) {
-		
+
 		List<Account> lc = new ArrayList<>(ids.length);
 
 		this.lock.lock();

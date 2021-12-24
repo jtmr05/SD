@@ -1,7 +1,7 @@
-package Guiao3;
+package guiao3;
 
 interface IBank {
-    
+
     public int createAccount(int balance);
 
     public int closeAccount(int id);

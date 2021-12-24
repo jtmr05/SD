@@ -1,4 +1,4 @@
-package Guiao7;
+package guiao7;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -23,7 +23,7 @@ class ContactManager {
     // @TODO
     public void update(Contact c) {
         this.lock.lock();
-        
+
         String key = c.getPhoneNumber() + "";
         if(!this.contacts.containsKey(key))
             this.contacts.put(key, c);

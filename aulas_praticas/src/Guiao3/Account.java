@@ -1,4 +1,4 @@
-package Guiao3;
+package guiao3;
 
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
@@ -8,8 +8,8 @@ class Account {
     private int balance;
     private final Lock lock;
 
-    Account(int balance) { 
-        this.balance = balance; 
+    Account(int balance) {
+        this.balance = balance;
         this.lock = new ReentrantLock();
     }
 
@@ -20,8 +20,8 @@ class Account {
     public void unlock(){
         this.lock.unlock();
     }
-    
-    public int balance() { 
+
+    public int balance() {
         return this.balance;
     }
 
@@ -34,7 +34,7 @@ class Account {
 
         if(value > this.balance)
             return false;
-        
+
         this.balance -= value;
         return true;
     }

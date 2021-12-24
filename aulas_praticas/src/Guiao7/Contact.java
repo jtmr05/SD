@@ -1,4 +1,4 @@
-package Guiao7;
+package guiao7;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -20,24 +20,24 @@ class Contact{
         this.emails = new ArrayList<>(emails);
     }
 
-    public String getName(){ 
-        return this.name; 
+    public String getName(){
+        return this.name;
     }
 
-    public int getAge(){ 
-        return this.age; 
+    public int getAge(){
+        return this.age;
     }
-    
-    public long getPhoneNumber(){ 
+
+    public long getPhoneNumber(){
         return this.phoneNumber;
     }
-    
-    public String getCompany(){ 
+
+    public String getCompany(){
         return this.company;
     }
-    
-    public List<String> getEmails(){ 
-        return new ArrayList<>(this.emails); 
+
+    public List<String> getEmails(){
+        return new ArrayList<>(this.emails);
     }
 
     // @TODO
@@ -52,7 +52,7 @@ class Contact{
         }
         else
             out.writeBoolean(false);
-        
+
         out.writeInt(this.emails.size());
         Iterator<String> iter = this.emails.iterator();
         while(iter.hasNext())
@@ -60,14 +60,14 @@ class Contact{
     }
 
     // @TODO
-    public static Contact deserialize (DataInputStream in){ 
+    public static Contact deserialize (DataInputStream in){
         try{
             String name = in.readUTF();
             int age = in.readInt();
             long phoneNumber = in.readLong();
-            
+
             String company = in.readBoolean() ? in.readUTF() : null;
-            
+
             int size = in.readInt();
             List<String> emails = new ArrayList<>(size);
             for(int i = 0; i < size; i++)

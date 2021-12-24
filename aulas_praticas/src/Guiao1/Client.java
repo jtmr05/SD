@@ -1,7 +1,7 @@
-package Guiao1;
+package guiao1;
 
 class Client implements Runnable {
-    
+
     private final IBank bank;
 
 	Client(IBank b){

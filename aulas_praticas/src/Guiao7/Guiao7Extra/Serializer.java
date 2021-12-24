@@ -1,4 +1,4 @@
-package Guiao7.Guiao7Extra;
+package guiao7.guiao7extra;
 
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -9,7 +9,7 @@ import java.util.Map.Entry;
 import java.util.function.Consumer;
 
 class Serializer {
- 
+
     private final Set<Long> people;
     private final Set<Entry<Long, Long>> relationships;
 
@@ -22,12 +22,12 @@ class Serializer {
         this.serializePersonalInfo(out, f);
         this.serializeRelationships(out);
     }
-    
+
     public void serializePersonalInfo(DataOutputStream out, Friend f) throws IOException {
         Long key = Long.valueOf(f.getPhoneNumber());
 
         if(!this.people.contains(key)){
-            
+
             this.people.add(key);
             out.writeBoolean(true); //has next...
             out.writeUTF(f.getName());
@@ -41,14 +41,14 @@ class Serializer {
                 this.relationships.add(entry);
                 try {
                     this.serializePersonalInfo(out, f);
-                } 
+                }
                 catch (IOException e) {
                     e.printStackTrace();
                 }
             };
 
             f.getFriends().stream().forEach(consumer);
-            
+
             out.writeBoolean(false);
         }
     }

@@ -1,25 +1,26 @@
-package Guiao8;
+package guiao8;
+
+import static guiao8.TaggedConnection.Frame;
 
 import java.net.Socket;
-import static Guiao8.TaggedConnection.Frame;
 
 class SequentialClient {
     public static void main(String[] args) throws Exception {
         Socket s = new Socket("localhost", 12345);
         TaggedConnection c =  new TaggedConnection(s);
-        
+
         try(c){
             // send request
             c.send(1, "Ola".getBytes());
-            
+
             // One-way
             c.send(0, ":-p".getBytes());
-            
+
             // get reply
             Frame f = c.receive();
             assert f.tag == 1;
             System.out.println("Reply: " + new String(f.data));
-            
+
             // Get stream of messages until empty msg
             c.send(2, "ABCDE".getBytes());
             for (;;) {

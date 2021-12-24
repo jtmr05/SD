@@ -1,15 +1,15 @@
-package Guiao2;
+package guiao2;
 
 import java.util.Random;
 
 public class Mover implements Runnable{
-    
+
     private final IBank b;
     private final int s;
 
-    Mover(IBank b, int s){ 
-        this.b=b; 
-        this.s=s; 
+    Mover(IBank b, int s){
+        this.b=b;
+        this.s=s;
     }
 
     public void run() {
@@ -18,7 +18,7 @@ public class Mover implements Runnable{
         Random rand = new Random();
 
         for (int m = 0; m < moves; m++){
-            from = rand.nextInt(this.s); 
+            from = rand.nextInt(this.s);
             while((to = rand.nextInt(this.s))==from);
             b.transfer(from, to, 1);
         }
